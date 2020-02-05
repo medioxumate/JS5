@@ -3,7 +3,7 @@
  * @author Brian Kiehn
  * @date 2/2/2020
  * @version 1.0
- * search.html
+ * json-search.html
  * https://github.com/medioxumate/JS5.git
  * GreenRiverDev
  -->
@@ -16,7 +16,9 @@
 </head>
 <body>
 <h1><b>Input a Name to search for:</b></h1>
-<input type="text">
-<button>search</button>
+<label><input type="text" id="search"></label>
+<button onclick="printJSON(janeD)">search</button>
+
+<ul style="list-style-type:none;" id="print"></ul>
 </body>
 </html>

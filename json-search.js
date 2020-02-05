@@ -16,8 +16,14 @@ janeD = {
     "Sex": "f",
     "Born" : 1876,
     "Died" : 1956,
-    "Farther" : "Petrus de Milliano",
-    "Mother" : "Sophia van Damme"
+    "Father" : {
+        "first" : "Petrus",
+        "last" : "de Milliano"
+    },
+    "Mother" : {
+        "first" : "Sophia",
+        "last" :  "van Damme"
+    }
 };
 
 janeR = {
@@ -28,23 +34,50 @@ janeR = {
     "Sex": "f",
     "Born" : 1878,
     "Died" : 1980,
-    "Farther" : "Petrus de Milliano",
-    "Mother" : "Isabel Nunez"
+    "Father" : {
+        "first" : "Petrus",
+        "last" : "de Milliano"
+    },
+    "Mother" : {
+        "first" : "Isabel",
+        "last" : "Nunez"
+    }
 };
 
 let list = {janeD, janeR};
 
+function search(){
+    let string = document.getElementById("search").value;
+    document.getElementById("print").innerHTML = "";
 
-function search(string){
-    for(let search in list){
+    let success = false;
 
+    if(string !== "") {
+        let reg = new RegExp(string, "i");
+        for (let query in list) {
+
+            if (query.search(reg) !== -1) {
+                printJSON(query);
+                success = true;
+            }
+        }
+        if (success === false) {
+            document.getElementById("print").innerHTML = "Could not find query.<br>";
+        }
+    }
+    else{
+        document.getElementById("print").innerHTML = "Query is empty.<br>";
     }
 }
 
-
 function printJSON(object) {
-    for (let part in object) {
-        document.getElementById("print").innerHTML += part + " : " + object[part] + "<br>";
-    }
-    document.getElementById("print").innerHTML += "<br>";
+        document.getElementById("print").innerHTML += "<li>Name: "+
+            object.Name.first+" "+object.Name.last+"</li>";
+        document.getElementById("print").innerHTML += "<li>Sex: " + object.Sex +"</li>";
+        document.getElementById("print").innerHTML += "<li>Born: " + object.Born+ "</li>";
+        document.getElementById("print").innerHTML += "<li>Died: " + object.Died+ "</li>";
+        document.getElementById("print").innerHTML += "<li>Father: "+
+            object.Father.first+" "+object.Father.last+"</li>";
+        document.getElementById("print").innerHTML += "<li>Mother: "+
+            object.Mother.first+" "+ object.Mother.last+"</li>";
 }
